@@ -38,10 +38,9 @@ public class Event implements Comparable<Event> {
     }
     //calculation of the endtime
     private int endtime(){
-//        if (startTime.equals("2:00"))
+       if (startTime.equals("2:00"))
         return 1;
     }
     public static void main(String [] args){
-//        Event a = new Event("10/30/2023","2:00pm","HILL114","CS cs@rutgers.edu","60");
     }
 }
