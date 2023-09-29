@@ -37,10 +37,10 @@ public class Event implements Comparable<Event> {
         return duration == event.duration && Objects.equals(date,event.date) && Objects.equals(startTime,event.startTime) && Objects.equals(location,event.location);
     }
     //calculation of the endtime
-    private int endtime(){
-       if (startTime.equals("2:00"))
-        return 1;
-    }
+//    private int endtime(){
+//       if (startTime.equals("2:00"))
+//        return 1;
+//    }
     public static void main(String [] args){
     }
 }
