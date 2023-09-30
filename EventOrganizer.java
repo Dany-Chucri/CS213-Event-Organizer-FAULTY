@@ -28,6 +28,5 @@ public class EventOrganizer {
     }
     public static void main(String[] args){
         EventOrganizer organizer=new EventOrganizer();
-
     }
 }

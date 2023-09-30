@@ -25,22 +25,32 @@ public class Event implements Comparable<Event> {
     }
     @Override
     public String toString(){
-        return("[Event Date: "+date+"] [Start: "+ startTime+"] [End: "+ endtime() + "] @" +location + "[Contact: " +  contact + "]");
+        return("[Event Date: "+this.date+"] [Start: "+ this.startTime+"] [End: "+ endtime() + "] @" +this.location + "[Contact: " +  this.contact + "]");
     }
     @Override
-    public boolean equals (Object o){
-        if (this == o)
-            return true;
-        if (o == null || getClass ()!= getClass())
-            return false;
-        Event event = (Event) o;
-        return duration == event.duration && Objects.equals(date,event.date) && Objects.equals(startTime,event.startTime) && Objects.equals(location,event.location);
+    public boolean equals (Object obj){
+        if (obj instanceof Event){
+            Event event = (Event) obj;
+            return this.date.equals(event.date) && this.startTime.equals(event.startTime)
+                    && this.location.equals(event.location) && this.contact.equals(event.contact) &&
+                    this.duration == event.duration;
+        }
+        return false;
     }
     //calculation of the endtime
-//    private int endtime(){
-//       if (startTime.equals("2:00"))
-//        return 1;
-//    }
+    private int endtime(){
+        int startHr = startTime.getHour();
+        int startMin = startTime.getMinute();
+
+        int totalTime = (startHr*60) +startMin;
+        int totalEnd = totalTime + this.duration;
+
+        int endHr = totalEnd/60;
+        int endMin = totalEnd %60;
+    //fix this
+        return endTime;
+    }
     public static void main(String [] args){
+        //testing
     }
 }
