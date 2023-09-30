@@ -30,6 +30,7 @@ public class Date implements Comparable<Date> {
 //        System.out.println(this.year);
 
     }
+
     public Date(){
         Calendar currInfo = Calendar.getInstance();
         this.year = currInfo.get(Calendar.YEAR);
@@ -37,6 +38,24 @@ public class Date implements Comparable<Date> {
         this.day= currInfo.get(Calendar.DAY_OF_MONTH);
     }
 
+    public int getDay() {
+        return day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    @Override
+    public String toString(){
+        return this.getMonth() + "/" + this.getDay() + "/" + this.getYear();
+    }
+
+    @Override
     public int compareTo(Date otherDate) {
         int yearComp = Integer.compare(this.year, otherDate.year);
         if (yearComp != 0) {
@@ -115,31 +134,31 @@ public class Date implements Comparable<Date> {
     }
 
     public static void main(String[] args) {
-        //Tests case 1 - invalid month - > Fail
+        //Tests case 1 - invalid month -> Fail
         System.out.println("Running Test Case 1");
         Date testCase1 = new Date("13/1/2023");
         if(testCase1.isValid()) System.out.println("Test Case 1 - invalid month -> Pass");
         else System.out.println("Test Case 1 - invalid month -> Fail");
 
-        // Test Case #2, testing day=31 on a 30-day month - > Fail
+        // Test Case #2, testing day=31 on a 30-day month -> Fail
         System.out.println("Running Test Case 2");
         Date testCase2 = new Date("9/31/2023");
         if(testCase2.isValid()) System.out.println("Test Case#2, testing day=31 on a 30-day month -> Pass");
         else System.out.println("Test Case 2,testing day=31 on a 30-day month -> Fail");
 
-        // Test Case #2a, testing day=31 on a 31-day month - > Pass
+        // Test Case #2a, testing day=31 on a 31-day month -> Pass
         System.out.println("Running Test Case #2a");
         Date testCase2a = new Date("12/31/2023");
         if(testCase2a.isValid()) System.out.println("Test Case#2a, testing day=31 on a 31-day month -> Pass");
         else System.out.println("Test Case#2a, testing day=31 on a 31-day month -> Fail");
 
-        // Test Case#3, checking a date in the future. - Fail
+        // Test Case#3, checking a date in the future. -> Fail
         System.out.println("Running Test Case#3");
         Date testCase3 = new Date("4/30/2023");
         if(testCase3.isValid()) System.out.println("Test Case #3, checking future date -> Pass");
         else System.out.println("Test Case#3. checking future date -> Fail");
 
-        // Test Case#3a, checking a date in the future. - Pass
+        // Test Case#3a, checking a date in the future. -> Pass
         System.out.println("Running Test Case#3a");
         Date testCase3a = new Date("2/1/2024");
         if(testCase3a.isValid()) System.out.println("Test Case #3a, checking future date -> Pass");
@@ -151,7 +170,7 @@ public class Date implements Comparable<Date> {
         if(testCase4.isValid()) System.out.println("Test Case#4, checking a date with 02/29 on a leap year -> Pass");
         else System.out.println("Test Case4, checking a date 02/29 on a leap year -> Fail");
 
-        //Test Case #5, checking a date that is past 6 months from current date ->Fail
+        //Test Case #5, checking a date that is past 6 months from current date -> Fail
         System.out.println("Running Test Case#5");
         Date testCase5 = new Date("6/30/2024");
         if(testCase5.isValid()) System.out.println("Test Case#5, checking a date that is past 6 months from current date -> Pass");

@@ -5,7 +5,7 @@ public enum Department {
     EE("Electrical Engineering"),
     ITI("Information Technology and Informatics"),
     MATH("Mathematics"),
-    BAIT("(Business Analytics and Information Technology");
+    BAIT("Business Analytics and Information Technology");
 
     private final String fullMajorName;
     Department(String fullMajorName) {
