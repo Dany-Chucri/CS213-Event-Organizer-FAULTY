@@ -42,7 +42,7 @@ public class EventCalendar {
             numEvents-=1;
             return true;
         }
-        return false;
+        //return false;
     }
     public boolean contains(Event event) {
         for (int i =0 ; i<numEvents;i++){

@@ -15,7 +15,7 @@ public class EventOrganizer {
             if(fullCommand.isEmpty())
                 continue;
 
-            switch(command){
+            /*switch(command){
                 case "A":
                 case "R":
                 case "Q":
@@ -23,7 +23,7 @@ public class EventOrganizer {
                     System.exit(0);
                 default:
                     System.out.println("Invalid Command");
-            }
+            }*/
         }
     }
     public static void main(String[] args){

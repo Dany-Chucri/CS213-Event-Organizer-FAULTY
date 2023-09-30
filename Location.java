@@ -6,7 +6,7 @@ public enum Location {
     AB2225("Academic Building, College Avenue"),
     MU302("Murray Hall, College Avenue");
 
-    private String buildingAndCampus;
+    private final String buildingAndCampus;
     Location(String buildingAndCampus) {
         this.buildingAndCampus = buildingAndCampus;
     }

@@ -2,11 +2,11 @@ import java.util.Objects;
 import java.util.Date;
 
 public class Event implements Comparable<Event> {
-    private Date date; //the event date
-    private Timeslot startTime; //the starting time
-    private Location location;
-    private Contact contact; //include the department name and email
-    private int duration; //in minutes
+    private final Date date; //the event date
+    private final Timeslot startTime; //the starting time
+    private final Location location;
+    private final Contact contact; //include the department name and email
+    private final int duration; //in minutes
 //>=30 <=120
     public Event(Date date, Timeslot startTime, Location location, Contact contact, int duration){
             this.date = date;
@@ -38,7 +38,7 @@ public class Event implements Comparable<Event> {
         return false;
     }
     //calculation of the endtime
-    private int endtime(){
+    private String endtime(){
         int startHr = startTime.getHour();
         int startMin = startTime.getMinute();
 
@@ -48,7 +48,7 @@ public class Event implements Comparable<Event> {
         int endHr = totalEnd/60;
         int endMin = totalEnd %60;
     //fix this
-        return endTime;
+        return "TEST PHRASE PLEASE CHANGE ASAP";
     }
     public static void main(String [] args){
         //testing

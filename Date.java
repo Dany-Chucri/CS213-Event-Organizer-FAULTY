@@ -1,12 +1,22 @@
 import java.util.Calendar;
 import java.util.StringTokenizer;
 public class Date implements Comparable<Date> {
-    private int year;
-    private int month;
-    private int day;
+    private final int year;
+    private final int month;
+    private final int day;
+
     public static final int QUADRENNIAL = 4;
     public static final int CENTENNIAL = 100;
     public static final int QUATERCENTENNIAL = 400;
+    public static final int THIS_YEAR = 2023;
+    public static final int FIRST_MONTH = 1;
+    public static final int LAST_MONTH = 12;
+    public static final int FIRST_DAY = 1;
+    public static final int NEXT_YEAR = 2024;
+    public static final int DAYS_FEB = 28;
+    public static final int EVEN_DAYS_MONTH = 30;
+    public static final int ODD_DAYS_MONTH = 31;
+
 
     public Date(String date){
         StringTokenizer part = new StringTokenizer(date,"/");
@@ -39,12 +49,16 @@ public class Date implements Comparable<Date> {
 
     public boolean isValid(){ //check if the date is a valid calendar date
 
-        if (this.year < 2023 || this.month < 1 || this.month > 12 || this.day< 1|| this.year>2024)
+        if (this.year < THIS_YEAR || this.month < FIRST_MONTH || this.month > LAST_MONTH || this.day < FIRST_DAY || this.year > NEXT_YEAR)
             return false;
 
-        int[] dayMonth = {0, 31, 28 + isLeapYear(), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int[] dayMonth = {0, ODD_DAYS_MONTH, DAYS_FEB + isLeapYear(),
+                ODD_DAYS_MONTH, EVEN_DAYS_MONTH, ODD_DAYS_MONTH,
+                EVEN_DAYS_MONTH, ODD_DAYS_MONTH, ODD_DAYS_MONTH,
+                EVEN_DAYS_MONTH, ODD_DAYS_MONTH, EVEN_DAYS_MONTH,
+                ODD_DAYS_MONTH};
 
-        if (checkDate() == false)
+        if (!checkDate())
             return false;
 
         Calendar eDate = Calendar.getInstance();
@@ -54,14 +68,11 @@ public class Date implements Comparable<Date> {
         specificDate.set(Calendar.DAY_OF_MONTH, this.day);
         eDate.add(Calendar.MONTH,6);
 
-        if(eDate.after(specificDate)==false){ //6 months or more error statement
+        if(!eDate.after(specificDate)){ //6 months or more error statement
             return false;
         }
 
-        if (this.day > dayMonth[month]) {
-            return false;
-        }
-        return true;
+        return this.day <= dayMonth[month];
     }
 
     private boolean checkDate(){ //method to check if the givenDate is a future date
@@ -105,51 +116,56 @@ public class Date implements Comparable<Date> {
         //Tests case 1 - invalid month - > Fail
         System.out.println("Running Test Case 1");
         Date testCase1 = new Date("13/1/2023");
-        if(testCase1.isValid()) System.out.println("Test Case 1 - invalid month. Passed");
-        else System.out.println("Test Case 1 - invalid month. Failed");
-        System.out.println("Running Test Case 1");
+        if(testCase1.isValid()) System.out.println("Test Case 1 - invalid month -> Pass");
+        else System.out.println("Test Case 1 - invalid month -> Fail");
 
         // Test Case #2, testing day=31 on a 30-day month - > Fail
         System.out.println("Running Test Case 2");
         Date testCase2 = new Date("9/31/2023");
-        if(testCase2.isValid()) System.out.println("Test Case#2, testing day=31 on a 30-day month. Passed");
-        else System.out.println("Test Case 2,testing day=31 on a 30-day month. Failed");
+        if(testCase2.isValid()) System.out.println("Test Case#2, testing day=31 on a 30-day month -> Pass");
+        else System.out.println("Test Case 2,testing day=31 on a 30-day month -> Fail");
 
         // Test Case #2a, testing day=31 on a 31-day month - > Pass
         System.out.println("Running Test Case #2a");
         Date testCase2a = new Date("12/31/2023");
-        if(testCase2a.isValid()) System.out.println("Test Case#2a, testing day=31 on a 31-day month. Passed");
-        else System.out.println("Test Case#2a, testing day=31 on a 31-day month. Failed");
+        if(testCase2a.isValid()) System.out.println("Test Case#2a, testing day=31 on a 31-day month -> Pass");
+        else System.out.println("Test Case#2a, testing day=31 on a 31-day month -> Fail");
 
         // Test Case#3, checking a date in the future. - Fail
         System.out.println("Running Test Case#3");
         Date testCase3 = new Date("4/30/2023");
-        if(testCase3.isValid()) System.out.println("Test Case #3, checking pass date - Passed");
-        else System.out.println("Test Case#3. checking pass date - Failed");
+        if(testCase3.isValid()) System.out.println("Test Case #3, checking future date -> Pass");
+        else System.out.println("Test Case#3. checking future date -> Fail");
 
         // Test Case#3a, checking a date in the future. - Pass
         System.out.println("Running Test Case#3a");
         Date testCase3a = new Date("2/1/2024");
-        if(testCase3a.isValid()) System.out.println("Test Case #3a, checking future date - Passed");
-        else System.out.println("Test Case#3a. checking future date - Failed");
+        if(testCase3a.isValid()) System.out.println("Test Case #3a, checking future date -> Pass");
+        else System.out.println("Test Case#3a. checking future date -> Fail");
 
         // Test Case #4, checking 02/29 on a leap year -> Pass
         System.out.println("Running Test Case#4");
         Date testCase4 = new Date("2/29/2024");
-        if(testCase4.isValid()) System.out.println("Test Case#4, checking a date with 02/29 on a leap year. Passed");
-        else System.out.println("Test Case4, checking a date 02/29 on a leap year. Failed");
+        if(testCase4.isValid()) System.out.println("Test Case#4, checking a date with 02/29 on a leap year -> Pass");
+        else System.out.println("Test Case4, checking a date 02/29 on a leap year -> Fail");
 
         //Test Case #5, checking a date that is past 6 months from current date ->Fail
         System.out.println("Running Test Case#5");
         Date testCase5 = new Date("6/30/2024");
-        if(testCase5.isValid()) System.out.println("Test Case#5, checking a date that is past 6 months from current date ->Pass");
-        else System.out.println("Test Case5, checking a date that is past 6 months from current date ->Fail");
+        if(testCase5.isValid()) System.out.println("Test Case#5, checking a date that is past 6 months from current date -> Pass");
+        else System.out.println("Test Case5, checking a date that is past 6 months from current date -> Fail");
 
         //Test Case #6, Normal date entry -> Pass
         System.out.println("Running Test Case#6");
         Date testCase6 = new Date("03/28/2024");
         if(testCase6.isValid()) System.out.println("Test Case#6, Normal Date entry -> Pass");
-        else System.out.println("Test Case6, Normal Date entry ->Fail");
+        else System.out.println("Test Case6, Normal Date entry -> Fail");
+
+        //Test Case #7, past date -> Fail
+        System.out.println("Running Test Case#7");
+        Date testCase7 = new Date("01/01/1999");
+        if(testCase7.isValid()) System.out.println("Test Case#7, checking future date -> Pass");
+        else System.out.println("Test Case6, checking future date -> Fail");
 
     }
 }

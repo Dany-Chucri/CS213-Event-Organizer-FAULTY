@@ -1,6 +1,6 @@
 public class Contact {
-    private Department department;
-    private String email;
+    private final Department department;
+    private final String email;
     public static final String[] departValid = {"EE","CS","BAIT","MATH","ITI"};
     public Contact(Department department, String email){
         this.email = email;
