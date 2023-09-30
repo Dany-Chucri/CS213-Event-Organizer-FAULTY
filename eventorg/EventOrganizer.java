@@ -1,3 +1,5 @@
+package eventorg;
+
 import java.util.Scanner;
 public class EventOrganizer {
     private EventCalendar calendar;

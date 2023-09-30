@@ -1,4 +1,5 @@
-import java.util.Objects;
+package eventorg;
+
 import java.util.Date;
 
 public class Event implements Comparable<Event> {
@@ -28,12 +29,10 @@ public class Event implements Comparable<Event> {
         return("[Event Date: "+this.date+"] [Start: "+ this.startTime+"] [End: "+ endtime() + "] @" +this.location + "[Contact: " +  this.contact + "]");
     }
     @Override
-    public boolean equals (Object obj){
-        if (obj instanceof Event){
-            Event event = (Event) obj;
+    public boolean equals(Object obj){
+        if (obj instanceof Event event){
             return this.date.equals(event.date) && this.startTime.equals(event.startTime)
-                    && this.location.equals(event.location) && this.contact.equals(event.contact) &&
-                    this.duration == event.duration;
+                    && this.location.equals(event.location);
         }
         return false;
     }

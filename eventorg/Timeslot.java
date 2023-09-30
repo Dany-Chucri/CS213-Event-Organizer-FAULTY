@@ -1,10 +1,12 @@
+package eventorg;
+
 public enum Timeslot {
     MORNING(10, 30),
     AFTERNOON(14, 0),
     EVENING(18, 30);
 
-    private int hour;
-    private int minute;
+    private final int hour;
+    private final int minute;
 
     Timeslot(int hour, int minute) {
         this.hour = hour;

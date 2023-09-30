@@ -1,3 +1,5 @@
+package eventorg;
+
 public class Contact {
     private final Department department;
     private final String email;
