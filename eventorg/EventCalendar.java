@@ -12,6 +12,14 @@ public class EventCalendar {
         numEvents = 0;
     }
 
+    public Event[] getEvents(){
+        return events;
+    }
+
+    public int getNumEvents(){
+        return numEvents;
+    }
+
     private int find(Event event) {//search an event in the list
         for (int i = 0; i < numEvents; i++){
             if (events[i].equals(event)){
@@ -133,4 +141,57 @@ public class EventCalendar {
         this.selectionSortDepartment();
         this.print();
     } //ordered by department
+
+    public static void main(String[] args){
+        EventCalendar calendar = new EventCalendar();
+        Date testDate1 = new Date("2/28/2024");
+        if (!testDate1.isValid()){
+            System.out.println("Invalid date!");
+            return;
+        }
+        Contact testContact1 = new Contact(Department.ITI, "ITI@rutgers.edu");
+        if (!testContact1.isValid()){
+            System.out.println("Invalid contact!");
+            return;
+        }
+        int duration1 = 30;
+        if (duration1 < 30 || duration1 > 120){
+            System.out.println("Invalid duration!");
+            return;
+        }
+        Event testEvent1 = new Event(testDate1, Timeslot.AFTERNOON, Location.TIL232, testContact1, duration1);
+        System.out.println(testEvent1);
+
+        Date testDate2 = new Date("2/28/2024");
+        if (!testDate2.isValid()){
+            System.out.println("Invalid date!");
+            return;
+        }
+        Contact testContact2 = new Contact(Department.CS, "CS@rutgers.edu");
+        if (!testContact1.isValid()){
+            System.out.println("Invalid contact!");
+            return;
+        }
+        int duration2 = 30;
+        if (duration2 < 30 || duration2 > 120){
+            System.out.println("Invalid duration!");
+            return;
+        }
+        Event testEvent2 = new Event(testDate1, Timeslot.EVENING, Location.HLL114, testContact2, duration2);
+        System.out.println(testEvent2);
+
+        calendar.add(testEvent1);
+        calendar.add(testEvent2);
+
+        System.out.println("Basic Print:");
+        calendar.print();
+
+        System.out.println("Campus Print:");
+        calendar.printByCampus();
+        System.out.println("Date Print:");
+        calendar.printByDate();
+        System.out.println("Department Print:");
+        calendar.printByDepartment();
+    }
+
 }
