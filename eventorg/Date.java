@@ -2,6 +2,12 @@ package eventorg;
 
 import java.util.Calendar;
 import java.util.StringTokenizer;
+
+/**
+ An event's Date information, including their department and email.
+ Check's the validity of an event's date to make sure it is in the future but not by more than 6 months.
+ @author Dany Chucri, Madhur Nutulapati
+ */
 public class Date implements Comparable<Date> {
     private final int year;
     private final int month;
@@ -19,7 +25,10 @@ public class Date implements Comparable<Date> {
     public static final int EVEN_DAYS_MONTH = 30;
     public static final int ODD_DAYS_MONTH = 31;
 
-
+    /**
+     Creates an instance of Date.
+     @param date A date String in the form of "xx/xx/xxxx".
+     */
     public Date(String date){
         StringTokenizer part = new StringTokenizer(date,"/");
         this.month= Integer.parseInt(part.nextToken());
@@ -31,6 +40,9 @@ public class Date implements Comparable<Date> {
 
     }
 
+    /**
+     Creates an instance of Date using the current date.
+     */
     public Date(){
         Calendar currInfo = Calendar.getInstance();
         this.year = currInfo.get(Calendar.YEAR);
@@ -38,23 +50,47 @@ public class Date implements Comparable<Date> {
         this.day= currInfo.get(Calendar.DAY_OF_MONTH);
     }
 
+    /**
+     Basic getter for a Date's day.
+     @return An integer representing the Date's day.
+     */
     public int getDay() {
         return day;
     }
 
+    /**
+     Basic getter for a Date's month.
+     @return An integer representing the Date's month.
+     */
     public int getMonth() {
         return month;
     }
 
+    /**
+     Basic getter for a Date's year.
+     @return An integer representing the Date's year.
+     */
     public int getYear() {
         return year;
     }
 
+
+    /**
+     * {@inheritDoc}
+     * Represents Date in the form of "xx/xx/xxxx".
+     * @return A String in the above form.
+     */
     @Override
     public String toString(){
         return this.getMonth() + "/" + this.getDay() + "/" + this.getYear();
     }
 
+    /**
+     * {@inheritDoc}
+     * Compares 2 Date objects based on which comes earlier.
+     * @param otherDate The Second date to be compared to.
+     * @return An integer using the same criterion as Object's compareTo().
+     */
     @Override
     public int compareTo(Date otherDate) {
         int yearComp = Integer.compare(this.year, otherDate.year);
@@ -68,7 +104,13 @@ public class Date implements Comparable<Date> {
         return Integer.compare(this.day, otherDate.day);
     }
 
-    public boolean isValid(){ //check if the date is a valid calendar date
+    /**
+     * Checks the validity of a given Date object.
+     * The Date must follow the Gregorian calendar.
+     * A given event cannot be more than 6 months into the future.
+     * @return True if the Date is valid, otherwise false.
+     */
+    public boolean isValid(){
 
         if (this.year < THIS_YEAR || this.month < FIRST_MONTH || this.month > LAST_MONTH || this.day < FIRST_DAY || this.year > NEXT_YEAR)
             return false;
@@ -96,7 +138,11 @@ public class Date implements Comparable<Date> {
         return this.day <= dayMonth[month];
     }
 
-    private boolean checkDate(){ //method to check if the givenDate is a future date
+    /**
+     * Used by isValid() to ensure the Date is a future date.
+     * @return True if the Date is a future date, otherwise false.
+     */
+    private boolean checkDate(){
         Date currDate = new Date();
 
         if (this.year > currDate.year) {
@@ -117,6 +163,11 @@ public class Date implements Comparable<Date> {
             }
         }
     }
+
+    /**
+     * Checks if a Date instance is part of a leap year.
+     * @return True if it is a leap year, otherwise false.
+     */
     private int isLeapYear() {
         if (this.year % QUADRENNIAL == 0) {
             if (this.year % CENTENNIAL == 0) {
@@ -133,6 +184,10 @@ public class Date implements Comparable<Date> {
         }
     }
 
+    /**
+     * Testbed main
+     * @param args Command-line input arguments.
+     */
     public static void main(String[] args) {
         //Tests case 1 - invalid month -> Fail
         System.out.println("Running Test Case 1");
