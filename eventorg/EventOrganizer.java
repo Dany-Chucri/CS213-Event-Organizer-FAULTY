@@ -25,7 +25,7 @@ public class EventOrganizer {
                     rCommand(token);
                     break;
                 case "P":
-                    pcCommand(token);
+                    pCommand(token);
                     break;
                 case "PE":
                     peCommand(token);
